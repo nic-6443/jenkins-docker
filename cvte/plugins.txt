@@ -18,3 +18,4 @@ token-macro:latest
 workflow-scm-step:latest
 workflow-step-api:latest
 workflow-aggregator:latest
+http_request:1.8.22
