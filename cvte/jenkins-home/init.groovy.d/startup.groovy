@@ -19,10 +19,10 @@ private void configureSecurity() {
 private def buildJob(String jobName) {
     Logger.global.info("Building job '$jobName")
     def job = Jenkins.instance.getJob(jobName)
-    Jenkins.instance.queue.schedule(job, 0, new CauseAction(new Cause() {
+    def waiting = Jenkins.instance.queue.schedule2(job, 0, new CauseAction(new Cause() {
         @Override
         String getShortDescription() {
             'Jenkins startup script'
         }
-    }))
+    })).getItem().getFuture().get()
 }

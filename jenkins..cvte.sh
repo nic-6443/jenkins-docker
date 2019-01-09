@@ -2,15 +2,11 @@
 
 : "${JENKINS_WAR:="/usr/share/jenkins/jenkins.war"}"
 : "${JENKINS_HOME:="/var/jenkins_home"}"
-
 touch "${COPY_REFERENCE_FILE_LOG}" || { echo "Can not write to ${COPY_REFERENCE_FILE_LOG}. Wrong volume permissions?"; exit 1; }
-
-ls /usr/share/jenkins/ref
-mkdir /usr/share/jenkins/ref/dsl
-curl http://172.18.91.177:8090/task/list  | sed  -e 's/"\]//g' -e 's/\["//g' |  awk -F '","' 'BEGIN {a=""} {for (b=1;b<=NF;b++) print $b}'|  xargs -I  {}  bash -c "curl http://172.18.91.177:8090/task/{}/detail -o  /usr/share/jenkins/ref/dsl/{}.groovy"
-
 echo "--- Copying files at $(date)" >> "$COPY_REFERENCE_FILE_LOG"
 find /usr/share/jenkins/ref/ \( -type f -o -type l \) -exec bash -c '. /usr/local/bin/jenkins-support; for arg; do copy_reference_file "$arg"; done' _ {} +
+
+export $(grep -v '^#' conf.properties | xargs -d '\n')
 
 # if `docker run` first argument start with `--` the user is passing jenkins launcher arguments
 if [[ $# -lt 1 ]] || [[ "$1" == "--"* ]]; then
