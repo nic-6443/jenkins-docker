@@ -7,7 +7,7 @@ touch "${COPY_REFERENCE_FILE_LOG}" || { echo "Can not write to ${COPY_REFERENCE_
 
 ls /usr/share/jenkins/ref
 mkdir /usr/share/jenkins/ref/dsl
-curl http://172.18.91.177:8090/task/list  | sed  -e 's/"\]//g' -e 's/\["//g' |  awk -F '","' 'BEGIN {a=""} {for (b=1;b<=NF;b++) print $b}'|  xargs -I  {}  bash -c "curl http://172.18.91.177:8090/task/{}/detail -o  /usr/share/jenkins/ref/dsl/{}.groovy"
+curl http://${TASK_HOST}/task/list  | sed  -e 's/"\]//g' -e 's/\["//g' |  awk -F '","' 'BEGIN {a=""} {for (b=1;b<=NF;b++) print $b}'|  xargs -I  {}  bash -c "curl http://${TASK_HOST}/task/{}/detail -o  /usr/share/jenkins/ref/dsl/{}.groovy"
 
 echo "--- Copying files at $(date)" >> "$COPY_REFERENCE_FILE_LOG"
 find /usr/share/jenkins/ref/ \( -type f -o -type l \) -exec bash -c '. /usr/local/bin/jenkins-support; for arg; do copy_reference_file "$arg"; done' _ {} +

@@ -92,6 +92,7 @@ USER root
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 
 ENV JENKINS_REF /usr/share/jenkins/ref
+ENV TASK_HOST task.gz.cvte.cn
 
 COPY ./cvte/jenkins-home/*.* $JENKINS_REF/
 COPY ./cvte/jenkins-home/jobs $JENKINS_REF/jobs/
