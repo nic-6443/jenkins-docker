@@ -5,6 +5,11 @@
 
 touch "${COPY_REFERENCE_FILE_LOG}" || { echo "Can not write to ${COPY_REFERENCE_FILE_LOG}. Wrong volume permissions?"; exit 1; }
 
+echo "--- Download pre-defined configs ---"
+curl http://${TASK_HOST}/jenkins/config/detail/config -o  /var/jenkins_home/config.xml
+curl http://${TASK_HOST}/jenkins/config/detail/credentials -o  /var/jenkins_home/credentials.xml
+
+echo "--- Download pre-defined task ---"
 ls /usr/share/jenkins/ref
 mkdir /usr/share/jenkins/ref/dsl
 curl http://${TASK_HOST}/task/list  | sed  -e 's/"\]//g' -e 's/\["//g' |  awk -F '","' 'BEGIN {a=""} {for (b=1;b<=NF;b++) print $b}'|  xargs -I  {}  bash -c "curl http://${TASK_HOST}/task/{}/detail -o  /usr/share/jenkins/ref/dsl/{}.groovy"

@@ -1,0 +1,1 @@
+docker ps | where {$_ -match "\S{12}"} | %{ $_.Split(' ')[0];} | %{&"docker" exec -it $_ /bin/bash} 

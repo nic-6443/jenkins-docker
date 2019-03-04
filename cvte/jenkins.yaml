@@ -1,0 +1,75 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: jenkins
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  strategy:
+    rollingUpdate:
+      maxSurge: 8
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        beta.kubernetes.io/arch: "amd64"
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - env:
+        - name: TASK_HOST
+          value: task-dev.gz.cvte.cn
+        - name: JAVA_OPTS
+          value: -Xms1425M -Xmx1425M
+        image: timothy/jenkins:1.0.0
+        imagePullPolicy: Never
+        livenessProbe:
+          failureThreshold: 4
+          initialDelaySeconds: 484
+          periodSeconds: 9
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 14
+        name: container
+        ports:
+        - containerPort: 8080
+          name: port-1
+          protocol: TCP
+        - containerPort: 50000
+          name: port-2
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          initialDelaySeconds: 4
+          periodSeconds: 4
+          successThreshold: 1
+          tcpSocket:
+            port: 8080
+          timeoutSeconds: 4
+        resources:
+          limits:
+            cpu: 1300m
+            memory: 1700Mi
+          requests:
+            cpu: 100m
+            memory: 400Mi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsConfig:
+        options:
+        - name: ndots
+          value: "2"
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: secret-5b183d13ac077cd11d914f22852aa38633113d03-2
+      nodeSelector:
+        beta.kubernetes.io/arch: "amd64"
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 50

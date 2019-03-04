@@ -1,3 +1,3 @@
 docker ps | where {$_ -match "\S{12}"} | %{ $_.Split(' ')[0];} | %{&"docker" kill $_} 
 docker build -f .\Dockerfile-cvte -t timothy/jenkins:1.0.0 .
-docker run -p 8080:8080 -p 50000:50000 timothy/jenkins:1.0.0
+docker run -p 9080:8080 -p 5001:50000 -e TASK_HOST=task-dev.gz.cvte.cn:8080  timothy/jenkins:1.0.0
