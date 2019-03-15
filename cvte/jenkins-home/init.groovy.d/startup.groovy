@@ -32,7 +32,7 @@ for (j in jobs) {
             Logger.global.info("[Running]  warm up task ... ")
             Logger.global.info(j.getName())
 
-            buildJob(j.getName())
+            j.scheduleBuild();
         }
     }
 }
