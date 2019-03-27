@@ -8,8 +8,8 @@ junit:1.27
 mailer:1.23
 matrix-project:1.13
 plain-credentials:1.5
-scm-api:2.3.0
-script-security:1.53
+scm-api:2.3.2
+script-security:1.56
 ssh-credentials:1.14
 structs:1.17
 token-macro:2.6
@@ -19,3 +19,5 @@ workflow-aggregator:2.6
 http_request:1.8.22
 kubernetes:1.14.3
 kubernetes-credentials-provider:0.10
+workflow-multibranch:2.21
+groovy:2.2
