@@ -21,3 +21,4 @@ kubernetes:1.14.3
 kubernetes-credentials-provider:0.10
 workflow-multibranch:2.21
 groovy:2.2
+global-post-script-plugin:1.1.4

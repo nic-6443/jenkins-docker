@@ -9,6 +9,8 @@ echo "--- Download pre-defined configs ---"
 curl http://${TASK_HOST}/jenkins/config/detail/config -o  /var/jenkins_home/config.xml
 curl http://${TASK_HOST}/jenkins/config/detail/credentials -o  /var/jenkins_home/credentials.xml
 curl http://${TASK_HOST}/jenkins/config/detail/notify-config -o  /var/jenkins_home/io.jenkins.plugins.global.pre.notify.GlobalPreNotifyConfiguration.xml
+curl http://${TASK_HOST}/jenkins/config/detail/global-post-script-config -o  /var/jenkins_home/com.orctom.jenkins.plugin.globalpostscript.GlobalPostScript.xml
+mkdir -p  /var/jenkins_home/global-post-script && curl http://${TASK_HOST}/jenkins/config/detail/notify-pipeline-task-script -o  /var/jenkins_home/global-post-script/notify-pipeline-task.groovy
 
 echo "--- Download pre-defined task ---"
 ls /usr/share/jenkins/ref
