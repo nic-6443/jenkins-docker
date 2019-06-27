@@ -9,7 +9,7 @@ mailer:1.23
 matrix-project:1.13
 plain-credentials:1.5
 scm-api:2.4.1
-script-security:1.56
+script-security:1.58
 ssh-credentials:1.14
 structs:1.19
 token-macro:2.6
