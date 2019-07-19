@@ -1,5 +1,6 @@
 FROM openjdk:8u191-jdk-alpine
 
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 RUN apk add --no-cache git openssh-client curl unzip bash ttf-dejavu coreutils tini
 
 ARG user=jenkins
