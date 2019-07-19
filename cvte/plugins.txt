@@ -9,7 +9,7 @@ mailer:1.23
 matrix-project:1.13
 plain-credentials:1.5
 scm-api:2.6.3
-script-security:1.60
+script-security:1.61
 ssh-credentials:1.14
 structs:1.19
 token-macro:2.6
@@ -20,9 +20,10 @@ http_request:1.8.22
 kubernetes:1.14.3
 kubernetes-credentials-provider:0.10
 workflow-multibranch:2.21
-groovy:2.71
+groovy:2.2
 global-post-script:1.1.4
-workflow-cps:2.70
+workflow-cps-global-lib:2.14
+workflow-cps:2.72
 workflow-durable-task-step:2.31
 workflow-basic-steps:2.18
 docker-workflow:1.18
