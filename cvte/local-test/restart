@@ -1,5 +1,6 @@
 docker container stop $(docker ps | grep -v 'IMAGE'|awk '{print $1}')
 docker container prune
-docker run -p 9080:8080 -p 50000:50000 -e TASK_HOST=task-dev.gz.cvte.cn:8080 \
-        -e JAVA_OPTS='-Dhudson.slaves.NodeProvisioner.recurrencePeriod -Dhudson.slaves.NodeProvisioner.initialDelay=20 -Dhudson.model.LoadStatistics.decay=0.1' \
-        --name jenkins jenkins-test
+docker run -p 9080:8080 -p 50000:50000 -e TASK_HOST=jenkins-support-dev.gz.cvte.cn \
+        -e JAVA_OPTS='-Xms1000M -Xmx1000M -Dhudson.slaves.NodeProvisioner.recurrencePeriod -Dhudson.slaves.NodeProvisioner.initialDelay=20 -Dhudson.model.LoadStatistics.decay=0.1 -Djenkins.security.ClassFilterImpl.SUPPRESS_ALL=true -Duser.timezone=Asia/Shanghai' \
+        -e ENV='DEV' \
+        --name jenkins-local jenkins-local
