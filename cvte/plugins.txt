@@ -56,3 +56,5 @@ workflow-multibranch:2.21
 workflow-scm-step:2.7
 workflow-step-api:2.20
 workflow-support:3.3
+docker-plugin:1.1.9
+jclouds-jenkins:2.17
