@@ -6,13 +6,7 @@
 touch "${COPY_REFERENCE_FILE_LOG}" || { echo "Can not write to ${COPY_REFERENCE_FILE_LOG}. Wrong volume permissions?"; exit 1; }
 
 echo "--- Download pre-defined configs ---"
-curl http://${TASK_HOST}/jenkins/config/detail/config -o  /var/jenkins_home/config.xml
-curl http://${TASK_HOST}/jenkins/config/detail/credentials -o  /var/jenkins_home/credentials.xml
-curl http://${TASK_HOST}/jenkins/config/detail/notify-config -o  /var/jenkins_home/io.jenkins.plugins.global.pre.notify.GlobalPreNotifyConfiguration.xml
-curl http://${TASK_HOST}/jenkins/config/detail/global-post-script-config -o  /var/jenkins_home/com.orctom.jenkins.plugin.globalpostscript.GlobalPostScript.xml
-curl http://${TASK_HOST}/jenkins/config/detail/jenkins_location_config -o  /var/jenkins_home/jenkins.model.JenkinsLocationConfiguration.xml
-curl http://${TASK_HOST}/jenkins/config/detail/script_approval_config -o  /var/jenkins_home/scriptApproval.xml
-mkdir -p  /var/jenkins_home/global-post-script && curl http://${TASK_HOST}/jenkins/config/detail/notify-pipeline-task-script -o  /var/jenkins_home/global-post-script/notify-pipeline-task.groovy
+curl http://${TASK_HOST}/jenkins/config/list -s |tee >(jq -r '.[] | "curl -s --create-dirs http://${TASK_HOST}/jenkins/config/detail/\(.configId) -o \(.path)"' | bash) | jq
 
 echo "--- Download pre-defined task ---"
 ls /usr/share/jenkins/ref

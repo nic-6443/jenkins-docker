@@ -91,4 +91,6 @@ COPY ./cvte/jenkins-home/jobs $JENKINS_REF/jobs/
 COPY ./cvte/jenkins-home/init.groovy.d $JENKINS_REF/init.groovy.d/
 COPY ./cvte/jenkins-home/secrets $JENKINS_REF/secrets/
 
+RUN wget "https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64" -O /usr/bin/jq && chmod +x /usr/bin/jq
+
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/jenkins.sh"]
