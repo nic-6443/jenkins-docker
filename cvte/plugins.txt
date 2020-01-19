@@ -67,3 +67,4 @@ workflow-support:latest
 command-launcher:latest
 jdk-tool:latest
 workflow-step-api:latest
+timestamper:latest
