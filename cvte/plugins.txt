@@ -69,3 +69,4 @@ jdk-tool:latest
 workflow-step-api:latest
 timestamper:latest
 pipeline-utility-steps:latest
+pipeline:latest
