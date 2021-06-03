@@ -85,3 +85,4 @@ ldap:latest
 email-ext:latest
 localization-support:latest
 localization-zh-cn:latest
+pipeline-github-lib:latest
